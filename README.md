@@ -1,17 +1,20 @@
-# Ember-uuid
+# ember-uuid
 
-This README outlines the details of collaborating on this Ember addon.
+A simple addon for generating v1 and v4 UUIDs in your Ember app.
 
 ## Installation
 
-* `git clone` this repository
-* `npm install`
-* `bower install`
+* `ember install ember-uuid`
 
-## Running
+## Usage
 
-* `ember server`
-* Visit your app at http://localhost:4200.
+### v4 UUIDs
+
+```js
+import {v4} from "ember-uuid/utils/uuid-generator";
+
+let uuid = v4();
+```
 
 ## Running Tests
 
