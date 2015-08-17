@@ -11,7 +11,7 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "ivanvanderbyl/ember-uuid",
   "engines": {
     "node": ">= 0.10.0"
   },
