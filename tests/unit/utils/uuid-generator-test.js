@@ -1,20 +1,18 @@
-import {v1, v4, parse, unparse} from '../../../utils/uuid-generator';
-import uuid from '../../../utils/uuid-generator';
+import {v1, v4, parse, unparse} from 'ember-uuid';
+import uuid from 'ember-uuid/utils/uuid-generator';
 import { module, test } from 'qunit';
-
 
 module('Unit | Utility | uuid generator');
 
 const TIME = 1321644961388; // 2011-11-18 11:36:01.388-08:00
 
-// Replace this with your real tests.
-// test('it works', function(assert) {
-//   var result = uuidGenerator();
-//   assert.ok(result);
-// });
-
 test('it generates v4 random UUIDs', function(assert) {
   var result = v4();
+  assert.ok((/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/).test(result));
+});
+
+test('it generates v1 UUIDs', function(assert) {
+  var result = v1();
   assert.ok((/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/).test(result));
 });
 
