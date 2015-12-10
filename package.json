@@ -1,6 +1,6 @@
 {
   "name": "ember-uuid",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "Ember utils for v1 and v4 UUID generation and parsing",
   "directories": {
     "doc": "doc",
