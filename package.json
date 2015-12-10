@@ -1,7 +1,7 @@
 {
   "name": "ember-uuid",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "1.0.0",
+  "description": "Ember utils for v1 and v4 UUID generation and parsing",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -11,11 +11,11 @@
     "start": "ember server",
     "test": "ember try:testall"
   },
-  "repository": "",
+  "repository": "ivanvanderbyl/ember-uuid",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Ivan Vanderbyl",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.2.0",
