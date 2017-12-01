@@ -4,7 +4,7 @@
 
 let rng;
 
-if (window.crypto && window.crypto.getRandomValues) {
+if (typeof window === 'undefined' && window.crypto && window.crypto.getRandomValues) {
   // WHATWG crypto-based RNG - http://wiki.whatwg.org/wiki/Crypto
   // Moderately fast, high quality
   let _rnds8 = new Uint8Array(16);
