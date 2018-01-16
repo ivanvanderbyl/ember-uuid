@@ -27,4 +27,4 @@ v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
 
 * `ember build`
 
-For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
