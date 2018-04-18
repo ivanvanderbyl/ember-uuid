@@ -20,6 +20,7 @@ v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
 
 ## Running Tests
 
+* `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
