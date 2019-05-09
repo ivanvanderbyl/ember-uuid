@@ -4,9 +4,14 @@
 
 A simple addon for generating v1 and v4 UUIDs in your Ember app. Uses `window.crypto` if available.
 
+## Compatibility
+
+- Ember.js v2.18 or above
+- Ember CLI v2.13 or above
+
 ## Installation
 
-* `ember install ember-uuid`
+- `ember install ember-uuid`
 
 ## Usage
 
@@ -22,12 +27,14 @@ v4(); // -> '110ec58a-a0f2-4ac4-8393-c866d813b8d1'
 
 ## Running Tests
 
-* `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
-* `ember test`
-* `ember test --server`
+- `yarn test` (Runs `ember try:each` to test your addon against multiple Ember versions)
+- `ember test`
+- `ember test --server`
 
-## Building
+## Contributing
 
-* `ember build`
+See the [Contributing](CONTRIBUTING.md) guide for details.
 
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).
+## License
+
+This project is licensed under the [MIT License](LICENSE.md).
