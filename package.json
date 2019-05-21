@@ -1,6 +1,6 @@
 {
   "name": "ember-uuid",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Ember utils for v1 and v4 UUID generation and parsing",
   "keywords": [
     "ember-addon"
