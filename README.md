@@ -1,6 +1,6 @@
 # ember-uuid
 
-[![Build Status](https://travis-ci.org/ivanvanderbyl/ember-uuid.svg?branch=master)](https://travis-ci.org/ivanvanderbyl/ember-uuid)
+[![CI](https://github.com/ivanvanderbyl/ember-uuid/actions/workflows/ci.yml/badge.svg)](https://github.com/ivanvanderbyl/ember-uuid/actions/workflows/ci.yml)
 
 A simple addon for generating v1 and v4 UUIDs in your Ember app. Uses `window.crypto` if available.
 
