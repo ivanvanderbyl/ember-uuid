@@ -20,11 +20,13 @@ for (var i = 0; i < 256; i++) {
 
 // **`parse()` - Parse a UUID into it's component bytes**
 function parse(s, buf, offset) {
-  var i = (buf && offset) || 0, ii = 0;
+  var i = (buf && offset) || 0,
+    ii = 0;
 
   buf = buf || [];
-  s.toLowerCase().replace(/[0-9a-f]{2}/g, function(oct) {
-    if (ii < 16) { // Don't overflow!
+  s.toLowerCase().replace(/[0-9a-f]{2}/g, function (oct) {
+    if (ii < 16) {
+      // Don't overflow!
       buf[i + ii++] = _hexToByte[oct];
     }
   });
@@ -39,15 +41,30 @@ function parse(s, buf, offset) {
 
 // **`unparse()` - Convert UUID byte array (ala parse()) into a string**
 function unparse(buf, offset) {
-  var i = offset || 0, bth = _byteToHex;
-  return  bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] + '-' +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]] +
-          bth[buf[i++]] + bth[buf[i++]];
+  var i = offset || 0,
+    bth = _byteToHex;
+  return (
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    '-' +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    '-' +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    '-' +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    '-' +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    bth[buf[i++]] +
+    bth[buf[i++]]
+  );
 }
 
 // **`v1()` - Generate time-based UUID**
@@ -61,18 +78,23 @@ var _seedBytes = _rng();
 // Per 4.5, create and 48-bit node id, (47 random bits + multicast bit = 1)
 var _nodeId = [
   _seedBytes[0] | 0x01,
-  _seedBytes[1], _seedBytes[2], _seedBytes[3], _seedBytes[4], _seedBytes[5]
+  _seedBytes[1],
+  _seedBytes[2],
+  _seedBytes[3],
+  _seedBytes[4],
+  _seedBytes[5],
 ];
 
 // Per 4.2.2, randomize (14 bit) clockseq
-var _clockseq = (_seedBytes[6] << 8 | _seedBytes[7]) & 0x3fff;
+var _clockseq = ((_seedBytes[6] << 8) | _seedBytes[7]) & 0x3fff;
 
 // Previous uuid creation time
-var _lastMSecs = 0, _lastNSecs = 0;
+var _lastMSecs = 0,
+  _lastNSecs = 0;
 
 // See https://github.com/broofa/node-uuid for API details
 function v1(options, buf, offset) {
-  var i = buf && offset || 0;
+  var i = (buf && offset) || 0;
   var b = buf || [];
 
   options = options || {};
@@ -83,18 +105,19 @@ function v1(options, buf, offset) {
   // (1582-10-15 00:00).  JSNumbers aren't precise enough for this, so
   // time is handled internally as 'msecs' (integer milliseconds) and 'nsecs'
   // (100-nanoseconds offset from msecs) since unix epoch, 1970-01-01 00:00.
-  var msecs = options.msecs !== undefined ? options.msecs : new Date().getTime();
+  var msecs =
+    options.msecs !== undefined ? options.msecs : new Date().getTime();
 
   // Per 4.2.1.2, use count of uuid's generated during the current clock
   // cycle to simulate higher resolution clock
   var nsecs = options.nsecs !== undefined ? options.nsecs : _lastNSecs + 1;
 
   // Time since last uuid creation (in msecs)
-  var dt = (msecs - _lastMSecs) + (nsecs - _lastNSecs)/10000;
+  var dt = msecs - _lastMSecs + (nsecs - _lastNSecs) / 10000;
 
   // Per 4.2.1.2, Bump clockseq on clock regression
   if (dt < 0 && options.clockseq === undefined) {
-    clockseq = clockseq + 1 & 0x3fff;
+    clockseq = (clockseq + 1) & 0x3fff;
   }
 
   // Reset nsecs if clock regresses (new clockseq) or we've moved onto a new
@@ -105,7 +128,7 @@ function v1(options, buf, offset) {
 
   // Per 4.2.1.2 Throw error if too many uuids are requested
   if (nsecs >= 10000) {
-    throw new Error('uuid.v1(): Can\'t create more than 10M uuids/sec');
+    throw new Error("uuid.v1(): Can't create more than 10M uuids/sec");
   }
 
   _lastMSecs = msecs;
@@ -117,22 +140,22 @@ function v1(options, buf, offset) {
 
   // `time_low`
   var tl = ((msecs & 0xfffffff) * 10000 + nsecs) % 0x100000000;
-  b[i++] = tl >>> 24 & 0xff;
-  b[i++] = tl >>> 16 & 0xff;
-  b[i++] = tl >>> 8 & 0xff;
+  b[i++] = (tl >>> 24) & 0xff;
+  b[i++] = (tl >>> 16) & 0xff;
+  b[i++] = (tl >>> 8) & 0xff;
   b[i++] = tl & 0xff;
 
   // `time_mid`
-  var tmh = (msecs / 0x100000000 * 10000) & 0xfffffff;
-  b[i++] = tmh >>> 8 & 0xff;
+  var tmh = ((msecs / 0x100000000) * 10000) & 0xfffffff;
+  b[i++] = (tmh >>> 8) & 0xff;
   b[i++] = tmh & 0xff;
 
   // `time_high_and_version`
-  b[i++] = tmh >>> 24 & 0xf | 0x10; // include version
-  b[i++] = tmh >>> 16 & 0xff;
+  b[i++] = ((tmh >>> 24) & 0xf) | 0x10; // include version
+  b[i++] = (tmh >>> 16) & 0xff;
 
   // `clock_seq_hi_and_reserved` (Per 4.2.2 - include variant)
-  b[i++] = clockseq >>> 8 | 0x80;
+  b[i++] = (clockseq >>> 8) | 0x80;
 
   // `clock_seq_low`
   b[i++] = clockseq & 0xff;
@@ -151,9 +174,9 @@ function v1(options, buf, offset) {
 // See https://github.com/broofa/node-uuid for API details
 function v4(options, buf, offset) {
   // Deprecated - 'format' argument, as supported in v1.2
-  var i = buf && offset || 0;
+  var i = (buf && offset) || 0;
 
-  if (typeof(options) === 'string') {
+  if (typeof options === 'string') {
     buf = options === 'binary' ? new Array(16) : null;
     options = null;
   }
@@ -182,4 +205,4 @@ export default {
   unparse: unparse,
 };
 
-export {v4, v1, parse, unparse};
+export { v4, v1, parse, unparse };
