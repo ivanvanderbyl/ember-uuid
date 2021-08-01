@@ -6,9 +6,9 @@ A simple addon for generating v1 and v4 UUIDs in your Ember app. Uses `window.cr
 
 ## Compatibility
 
-* Ember.js v2.18 or above
-* Ember CLI v2.13 or above
-* Node.js v8 or above
+* Ember.js v3.20 or above
+* Ember CLI v3.20 or above
+* Node.js v10 or above
 
 
 ## Installation
